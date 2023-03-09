@@ -11,24 +11,19 @@ export const ContactForm = () => {
 
   const handleFormSubmit = event => {
     event.preventDefault();
-
-    const { name, value } = event.target.elements;
-    const number = event.target.elements.number.value;
-    const object = { [name.name]: value, [number.name]: number.value };
-
-    const includesName = contacts.find(
-      contact =>
-        contact.name && contact.name.toLowerCase() === value.toLowerCase()
+    const { name, number } = event.target.elements;
+    const contact = { name: name.value, number: number.value };
+    const includesName = contacts.some(
+      contact => contact.name.toLowerCase() === name.value.toLowerCase()
     );
 
-
     if (includesName) {
-      alert(`${value} уже есть в списке контактов`);
+      alert(`${name.value} уже есть в списке контактов`);
       event.target.reset();
       return;
     }
 
-    dispatch(addContact(object));
+    dispatch(addContact(contact));
 
     event.target.reset();
   };
