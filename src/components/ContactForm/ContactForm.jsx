@@ -17,8 +17,10 @@ export const ContactForm = () => {
     const object = { [name.name]: value, [number.name]: number.value };
 
     const includesName = contacts.find(
-      contact => contact.name.toLowerCase() === value.toLowerCase()
+      contact =>
+        contact.name && contact.name.toLowerCase() === value.toLowerCase()
     );
+
 
     if (includesName) {
       alert(`${value} уже есть в списке контактов`);
